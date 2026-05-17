@@ -143,17 +143,52 @@
     50%      { opacity: .4; transform: scale(1.4); }
   }
 
-  .hero-name {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(2.6rem, 7vw, 5.5rem);
-    line-height: 1.0;
+  /* ── HERO USERNAME ── */
+  .hero-username-line {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-code);
+    font-size: clamp(2rem, 6.5vw, 5rem);
+    font-weight: 500;
     color: var(--text-head);
-    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: .5rem;
     animation: fadeUp .7s .1s ease both;
+    letter-spacing: -1px;
   }
 
-  .hero-name .accent { color: var(--accent); }
+  .hero-username-prefix {
+    color: var(--accent3);
+    font-size: clamp(1rem, 3vw, 2.2rem);
+    margin-right: .3rem;
+    opacity: .7;
+  }
+
+  .hero-username-text { color: var(--accent); }
+
+  .username-cursor {
+    color: var(--accent);
+    margin-left: 2px;
+    animation: blink .75s step-end infinite;
+    font-size: clamp(1.8rem, 5.5vw, 4.2rem);
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .username-cursor.hide { display: none; }
+
+  .hero-realname {
+    font-family: var(--font-display);
+    font-size: clamp(.8rem, 1.6vw, 1rem);
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    animation: fadeUp .7s .15s ease both;
+  }
+
+  .hero-realname::before { content: '# '; color: var(--muted); }
 
   .hero-title {
     font-family: var(--font-code);
@@ -904,7 +939,7 @@
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav>
-  <a href="#home" class="nav-logo">ks<span>://</span>root</a>
+  <a href="#home" class="nav-logo">itskonly<span>://</span>root</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -926,7 +961,10 @@
       <span class="badge-dot"></span>
       Available for opportunities
     </div>
-    <h1 class="hero-name">Kaustubh<br/><span class="accent">Swami.</span></h1>
+    <div class="hero-username-line">
+      <span class="hero-username-prefix">~$&nbsp;</span><span id="typed-username" class="hero-username-text"></span><span class="username-cursor">&#9607;</span>
+    </div>
+    <p class="hero-realname">Kaustubh Swami</p>
     <p class="hero-title">
       <span class="typed-prefix">role:</span>
       <span class="typed-val"> Aspiring Web Application Penetration Tester</span>
@@ -963,12 +1001,12 @@
       <div class="term-dot r"></div>
       <div class="term-dot y"></div>
       <div class="term-dot g"></div>
-      <span class="term-title">kali@kaustubh: ~</span>
+      <span class="term-title">kali@itskonly: ~</span>
     </div>
     <div class="term-body">
-      <div><span class="t-prompt">┌──(kali㉿kaustubh)-[~]</span></div>
+      <div><span class="t-prompt">┌──(kali㉿itskonly)-[~]</span></div>
       <div><span class="t-prompt">└─$</span> <span class="t-cmd">whoami</span></div>
-      <div class="t-out">kaustubh-swami</div>
+      <div class="t-out">itskonly</div>
       <br/>
       <div><span class="t-prompt">└─$</span> <span class="t-cmd">cat profile.json</span></div>
       <div>{</div>
@@ -1519,6 +1557,23 @@
       card.style.display = (matchCat && matchText) ? '' : 'none';
     });
   }
+
+  // ── TYPING ANIMATION for username ──
+  (function() {
+    const username = 'itskonly';
+    const el       = document.getElementById('typed-username');
+    const cursor   = document.querySelector('.username-cursor');
+    let i = 0;
+    setTimeout(() => typeNext(), 600);
+    function typeNext() {
+      if (i < username.length) {
+        el.textContent += username[i++];
+        setTimeout(typeNext, 80 + Math.random() * 70);
+      } else {
+        setTimeout(() => cursor.classList.add('hide'), 1800);
+      }
+    }
+  })();
 
   // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
