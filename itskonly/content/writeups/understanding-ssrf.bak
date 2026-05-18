@@ -1,0 +1,69 @@
+---
+title: "Understanding SSRF — From Theory to Lab"
+date: 2025-05-17
+category: web
+difficulty: medium
+tags: ["SSRF", "OWASP", "Burp Suite", "PortSwigger"]
+summary: "Breaking down Server-Side Request Forgery: how it works, why it's dangerous, and hands-on exploitation in controlled PortSwigger labs."
+published: true
+---
+
+## What is SSRF?
+
+Server-Side Request Forgery (SSRF) is a vulnerability that allows an attacker to **induce the server-side application to make HTTP requests to an arbitrary domain** of the attacker's choosing.
+
+This is dangerous because the server often has access to internal services that aren't exposed externally — think cloud metadata endpoints, internal APIs, and admin panels.
+
+---
+
+## The Classic Example
+
+```http
+POST /product/stock HTTP/1.1
+Host: vulnerable-site.com
+Content-Type: application/x-www-form-urlencoded
+
+stockApi=http://internal-service/admin
+```
+
+If the application doesn't validate the `stockApi` parameter, the server will make a request to `http://internal-service/admin` on our behalf.
+
+---
+
+## Lab Walkthrough — Basic SSRF
+
+**Target:** PortSwigger Web Security Academy — Basic SSRF against the local server.
+
+### Step 1: Recon
+
+Intercept the stock check request in Burp Suite. You'll see:
+
+```
+stockApi=http%3A%2F%2Fstock.weliketoshop.net%2Fproduct%2Fstock%2Fcheck%3FproductId%3D1%26storeId%3D1
+```
+
+### Step 2: Modify the parameter
+
+Change the value to target the local admin panel:
+
+```
+stockApi=http://localhost/admin
+```
+
+### Step 3: Access admin functionality
+
+The server fetches the admin page and returns it in the response. We can now delete users, access internal data.
+
+---
+
+## Lessons Learned
+
+- Always URL-encode your payloads when submitting via forms
+- The `localhost` bypass is the first thing to try
+- Check for blind SSRF with out-of-band callbacks (Burp Collaborator)
+
+---
+
+## What's Next
+
+Working through the blind SSRF labs next — where there's no visible response and you need out-of-band detection.

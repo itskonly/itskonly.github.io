@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+
+:root {
+  --font-syne:       'Syne', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+  --font-fira-code:  'Fira Code', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #0a0c0f;
+  color: #c8d6e5;
+  font-family: var(--font-space-mono);
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0c0f; }
+::-webkit-scrollbar-thumb { background: #1e242c; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00e5ff44; }
+
+/* Code blocks from rehype-pretty-code */
+[data-rehype-pretty-code-fragment] pre {
+  background: #13171c !important;
+  border: 1px solid #1e242c;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  font-family: var(--font-fira-code);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  margin: 1.5rem 0;
+}
+
+[data-rehype-pretty-code-fragment] code {
+  background: transparent !important;
+  padding: 0 !important;
+  color: #c8d6e5;
+}
+
+[data-line] { padding: 0 1rem; }
+
+[data-highlighted-line] {
+  background: rgba(0, 229, 255, 0.07);
+  border-left: 2px solid #00e5ff;
+}
+
+/* Selection */
+::selection { background: rgba(0,229,255,0.2); color: #e8f0fa; }
+
+@layer utilities {
+  .section-grid { background-image: linear-gradient(rgba(0,229,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,.025) 1px, transparent 1px); background-size: 40px 40px; }
+  .text-gradient { background: linear-gradient(135deg, #00e5ff, #2ecc71); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .glass { background: rgba(15,18,21,0.8); backdrop-filter: blur(12px); }
+}

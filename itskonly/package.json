@@ -1,0 +1,40 @@
+{
+  "name": "itskonly",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "contentlayer": "^0.3.4",
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.2.10",
+    "gray-matter": "^4.0.3",
+    "mdx-bundler": "^9.2.1",
+    "next": "14.2.3",
+    "next-contentlayer": "^0.3.4",
+    "next-themes": "^0.3.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-syntax-highlighter": "^15.5.0",
+    "reading-time": "^1.5.0",
+    "rehype-pretty-code": "^0.13.1",
+    "remark-gfm": "^4.0.0",
+    "shiki": "^1.6.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
